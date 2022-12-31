@@ -19,7 +19,8 @@ class LanguageSwitch
      */
     public function handle(Request $request,mixed $next):mixed
     {
-        $lang = Cache::get(auth()->id().'.locale');
+        $lang = Cache::get(auth()->id().'.locale', app()->getLocale());
+
         if ($lang) {
             app()->setLocale($lang);
             if (in_array($lang,config('nova-language-switch.rtl-languages'), true)) {
